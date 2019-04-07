@@ -10,13 +10,13 @@ class ShowTest extends FunSpec with Matchers {
 
     it("should transform a known type to a string using default instances") {
       import cats.instances.int._
-      catsStdShowForInt.show(3) shouldEqual("3")
+      catsStdShowForInt.show(3) shouldEqual "3"
     }
 
     it("should transform a known type to a string using default syntax") {
       import cats.instances.int._
       import cats.syntax.show._
-      3.show shouldEqual("3")
+      3.show shouldEqual "3"
     }
 
     it("should transform a custom type providing an implicit instance") {
