@@ -1,4 +1,4 @@
-package sandbox.chapter1.models
+package sandbox.models
 
 import sandbox.chapter1.json.{JsObject, JsString, JsonWriter}
 import sandbox.chapter1.printable.Printable

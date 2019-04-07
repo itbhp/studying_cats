@@ -1,7 +1,7 @@
 package sandbox.chapter1.printable
 
 import org.scalatest.{FunSpec, Matchers}
-import sandbox.chapter1.models.Cat
+import sandbox.models.Cat
 
 class PrintableSyntaxTest extends FunSpec with Matchers {
 
