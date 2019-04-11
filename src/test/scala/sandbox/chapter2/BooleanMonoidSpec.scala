@@ -37,4 +37,15 @@ class BooleanMonoidSpec extends FunSpec with Matchers with GeneratorDrivenProper
       }
     }
   }
+
+  describe("xnorMonoid"){
+    it("should respect the laws"){
+      import MonoidLaws._
+      import MonoidInstances.xnorMonoid
+
+      forAll{
+        (x: Boolean, y: Boolean, z: Boolean) => associativeLaw(x,y,z)
+      }
+    }
+  }
 }
