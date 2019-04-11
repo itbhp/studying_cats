@@ -31,4 +31,10 @@ object MonoidInstances{
 
     override def combine(x: Boolean, y: Boolean): Boolean = x && y
   }
+
+  implicit val orMonoid: Monoid[Boolean] = new Monoid[Boolean] {
+    override def empty: Boolean = false
+
+    override def combine(x: Boolean, y: Boolean): Boolean = x || y
+  }
 }
