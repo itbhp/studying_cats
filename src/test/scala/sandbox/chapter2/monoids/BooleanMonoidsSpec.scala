@@ -1,50 +1,67 @@
-package sandbox.chapter2
+package sandbox.chapter2.monoids
 
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.scalatest.{FunSpec, Matchers}
+import sandbox.chapter2.{BooleanMonoidInstances, MonoidLaws}
 
-class BooleanMonoidSpec extends FunSpec with Matchers with GeneratorDrivenPropertyChecks{
+class BooleanMonoidsSpec extends FunSpec with Matchers with GeneratorDrivenPropertyChecks{
 
   describe("andMonoid"){
     it("should respect the laws"){
+      import BooleanMonoidInstances.andMonoid
       import MonoidLaws._
-      import MonoidInstances.andMonoid
 
       forAll{
         (x: Boolean, y: Boolean, z: Boolean) => associativeLaw(x,y,z)
+      }
+
+      forAll{
+        x: Boolean => identityLaw(x)
       }
     }
   }
 
   describe("orMonoid"){
     it("should respect the laws"){
+      import BooleanMonoidInstances.orMonoid
       import MonoidLaws._
-      import MonoidInstances.orMonoid
 
       forAll{
         (x: Boolean, y: Boolean, z: Boolean) => associativeLaw(x,y,z)
+      }
+
+      forAll{
+        x: Boolean => identityLaw(x)
       }
     }
   }
 
   describe("xorMonoid"){
     it("should respect the laws"){
+      import BooleanMonoidInstances.xorMonoid
       import MonoidLaws._
-      import MonoidInstances.xorMonoid
 
       forAll{
         (x: Boolean, y: Boolean, z: Boolean) => associativeLaw(x,y,z)
+      }
+
+      forAll{
+        x: Boolean => identityLaw(x)
       }
     }
   }
 
   describe("xnorMonoid"){
     it("should respect the laws"){
+      import BooleanMonoidInstances.xnorMonoid
       import MonoidLaws._
-      import MonoidInstances.xnorMonoid
 
       forAll{
         (x: Boolean, y: Boolean, z: Boolean) => associativeLaw(x,y,z)
+      }
+
+      forAll{
+        x: Boolean => identityLaw(x)
       }
     }
   }

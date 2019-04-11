@@ -24,8 +24,7 @@ object MonoidLaws {
   }
 }
 
-object MonoidInstances{
-
+object BooleanMonoidInstances{
   implicit val andMonoid: Monoid[Boolean] = new Monoid[Boolean] {
     override def empty: Boolean = true
 
@@ -48,5 +47,13 @@ object MonoidInstances{
     override def empty: Boolean = false
 
     override def combine(x: Boolean, y: Boolean): Boolean = x == y
+  }
+}
+
+object SetsMonoidInstances{
+  implicit def unionMonoid[A]: Monoid[Set[A]] = new Monoid[Set[A]] {
+    override def empty: Set[A] = Set.empty[A]
+
+    override def combine(x: Set[A], y: Set[A]): Set[A] = x union y
   }
 }
