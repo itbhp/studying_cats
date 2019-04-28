@@ -1,4 +1,4 @@
-package sandbox.chapter2
+package sandbox.chapter2.typeclasses
 
 trait Semigroup[A] {
   def combine(x: A, y: A): A

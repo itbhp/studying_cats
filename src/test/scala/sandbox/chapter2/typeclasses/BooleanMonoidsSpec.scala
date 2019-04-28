@@ -1,15 +1,14 @@
-package sandbox.chapter2.monoids
+package sandbox.chapter2.typeclasses
 
 import org.scalatest.prop.GeneratorDrivenPropertyChecks
 import org.scalatest.{FunSpec, Matchers}
-import sandbox.chapter2.{BooleanMonoidInstances, MonoidLaws}
 
 class BooleanMonoidsSpec extends FunSpec with Matchers with GeneratorDrivenPropertyChecks{
 
   describe("andMonoid"){
     it("should respect the laws"){
-      import BooleanMonoidInstances.andMonoid
-      import MonoidLaws._
+      import sandbox.chapter2.typeclasses.BooleanMonoidInstances.andMonoid
+      import sandbox.chapter2.typeclasses.MonoidLaws._
 
       forAll{
         (x: Boolean, y: Boolean, z: Boolean) => associativeLaw(x,y,z)
@@ -23,8 +22,8 @@ class BooleanMonoidsSpec extends FunSpec with Matchers with GeneratorDrivenPrope
 
   describe("orMonoid"){
     it("should respect the laws"){
-      import BooleanMonoidInstances.orMonoid
-      import MonoidLaws._
+      import sandbox.chapter2.typeclasses.BooleanMonoidInstances.orMonoid
+      import sandbox.chapter2.typeclasses.MonoidLaws._
 
       forAll{
         (x: Boolean, y: Boolean, z: Boolean) => associativeLaw(x,y,z)
@@ -38,8 +37,8 @@ class BooleanMonoidsSpec extends FunSpec with Matchers with GeneratorDrivenPrope
 
   describe("xorMonoid"){
     it("should respect the laws"){
-      import BooleanMonoidInstances.xorMonoid
-      import MonoidLaws._
+      import sandbox.chapter2.typeclasses.BooleanMonoidInstances.xorMonoid
+      import sandbox.chapter2.typeclasses.MonoidLaws._
 
       forAll{
         (x: Boolean, y: Boolean, z: Boolean) => associativeLaw(x,y,z)
@@ -53,8 +52,8 @@ class BooleanMonoidsSpec extends FunSpec with Matchers with GeneratorDrivenPrope
 
   describe("xnorMonoid"){
     it("should respect the laws"){
-      import BooleanMonoidInstances.xnorMonoid
-      import MonoidLaws._
+      import sandbox.chapter2.typeclasses.BooleanMonoidInstances.xnorMonoid
+      import sandbox.chapter2.typeclasses.MonoidLaws._
 
       forAll{
         (x: Boolean, y: Boolean, z: Boolean) => associativeLaw(x,y,z)
