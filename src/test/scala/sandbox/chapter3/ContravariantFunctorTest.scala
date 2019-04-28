@@ -7,6 +7,7 @@ class ContravariantFunctorTest extends FunSuite with Matchers {
 
   test("contramap") {
     import PrintableFunctors._
+    import cats.syntax.contravariant._
     import sandbox.chapter1.printable.PrintableInstances._
 
     case class Person(name: String, age: Int)

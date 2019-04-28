@@ -1,11 +1,12 @@
 package sandbox.chapter3
 
+import cats.Contravariant
 import sandbox.chapter1.printable.Printable
 
 object PrintableFunctors {
 
-  implicit class PrintableContravariant[A](a: Printable[A]) {
-    def contramap[B](f: B => A): Printable[B] = ???
+  implicit val contravariantFunctor = new Contravariant[Printable] {
+    override def contramap[A, B](fa: Printable[A])(f: B => A): Printable[B] = (b: B) => fa.format(f(b))
   }
 
 }
