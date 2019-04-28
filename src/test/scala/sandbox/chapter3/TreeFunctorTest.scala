@@ -3,7 +3,7 @@ package sandbox.chapter3
 import cats.Functor
 import cats.syntax.functor._
 import org.scalatest.{FunSuite, Matchers}
-import sandbox.chapter3.TreeOps._
+import sandbox.chapter3.TreeTypeClassesInstances._
 
 class TreeFunctorTest extends FunSuite with Matchers {
 

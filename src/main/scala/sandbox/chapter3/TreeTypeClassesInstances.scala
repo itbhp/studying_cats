@@ -2,7 +2,7 @@ package sandbox.chapter3
 
 import cats.Functor
 
-object TreeOps {
+object TreeTypeClassesInstances {
 
   implicit def treeFunctor: Functor[Tree] = new Functor[Tree] {
     override def map[A, B](fa: Tree[A])(f: A => B): Tree[B] = fa match {
