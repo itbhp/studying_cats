@@ -30,7 +30,7 @@ class SuperAdderTest extends FunSpec with Matchers {
   describe("with Order") {
 
     it("should add empty list to zero") {
-      SuperAdder.add(List[Order]()) shouldEqual Order(0, 0)
+      SuperAdder.add(List[Order]()) shouldEqual Order.EMPTY
     }
 
     it("should add non empty list") {
