@@ -56,4 +56,10 @@ object SetsMonoidInstances{
 
     override def combine(x: Set[A], y: Set[A]): Set[A] = x union y
   }
+
+  implicit def intersectionMonoid[A]: Monoid[Set[A]] = new Monoid[Set[A]] {
+    override def empty: Set[A] = Set.empty[A]
+
+    override def combine(x: Set[A], y: Set[A]): Set[A] = x intersect y
+  }
 }

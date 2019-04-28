@@ -18,4 +18,18 @@ class SetsMonoidSpec extends FunSpec with Matchers with GeneratorDrivenPropertyC
       }
     }
   }
+
+  describe("intersect monoid") {
+    it("should respect the laws") {
+      import sandbox.chapter2.MonoidLaws._
+      import sandbox.chapter2.SetsMonoidInstances.intersectionMonoid
+
+      forAll(
+        (x:Set[Int], y:Set[Int], z:Set[Int]) => associativeLaw(x,y, z)
+      )
+      forAll{
+        x: Set[Int] => identityLaw(x)
+      }
+    }
+  }
 }
