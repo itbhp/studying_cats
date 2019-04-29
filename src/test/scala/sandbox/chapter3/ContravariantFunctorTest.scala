@@ -9,11 +9,12 @@ class ContravariantFunctorTest extends FunSuite with Matchers {
     import PrintableFunctors._
     import cats.syntax.contravariant._
     import sandbox.chapter1.printable.PrintableInstances._
+    import sandbox.chapter1.printable.PrintableSyntax._
 
     case class Person(name: String, age: Int)
 
-    val printableDouble: Printable[Person] = printableInt.contramap(_.age)
+    implicit val printableDouble: Printable[Person] = printableInt.contramap(_.age)
 
-    printableDouble.format(Person("Paolo", 34)) shouldEqual "34"
+    Person("Paolo", 34).format() shouldEqual "34"
   }
 }
