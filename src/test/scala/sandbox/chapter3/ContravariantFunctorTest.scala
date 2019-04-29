@@ -13,7 +13,7 @@ class ContravariantFunctorTest extends FunSuite with Matchers {
 
     case class Person(name: String, age: Int)
 
-    implicit val printableDouble: Printable[Person] = printableInt.contramap(_.age)
+    implicit val printablePerson: Printable[Person] = printableInt.contramap(_.age)
 
     Person("Paolo", 34).format() shouldEqual "34"
   }
