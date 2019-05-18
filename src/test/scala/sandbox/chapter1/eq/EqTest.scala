@@ -20,18 +20,19 @@ class EqTest extends FunSpec with Matchers {
     // TripleEqualSupport used by scala test
 
     it("should compare known types using default syntax") {
-      import cats.instances.int._
       import EqSupport._
+      import cats.instances.int._
       compare(2, 3) shouldEqual false
     }
 
     it("should compare a custom type providing an implicit instance") {
       import EqSupport._
-      import cats.instances.string._
       import cats.instances.option._
+      import cats.instances.string._
 
       val fluffy = Cat("fluffy")
-      compare(fluffy, Cat("bob"))
+
+      compare(fluffy, Cat("bob")) shouldEqual false
 
       val someCat = Option(fluffy)
       val noCat = Option.empty[Cat]
