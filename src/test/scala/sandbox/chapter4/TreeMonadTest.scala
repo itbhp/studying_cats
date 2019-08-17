@@ -17,7 +17,7 @@ class TreeMonadTest extends FunSpec with Matchers{
       val aTree: Tree[Int] = Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))
 
       treeMonad.flatMap(aTree)(a => Leaf(a.toString)) shouldEqual Branch(Branch(Leaf("1"), Leaf("2")), Leaf("3"))
-    }s
+    }
   }
 
 }
