@@ -23,6 +23,10 @@ class ValidatedExampleTest extends FunSuite with Matchers {
     readUser(Map("name" -> "Pippo", "age" -> "" )) shouldEqual Validated.invalid(List("Age empty"))
   }
 
+  test("read User age non negative"){
+    readUser(Map("name" -> "Pippo", "age" -> "-43" )) shouldEqual Validated.invalid(List("Age must be non negative"))
+  }
+
   test("read User age not present"){
     readUser(Map("name" -> "Pippo" )) shouldEqual Validated.invalid(List("Age not found"))
   }

@@ -30,6 +30,7 @@ object ValidatedExample {
       ageStr <- getValue(formData, "age")
       _      <- nonEmpty(ageStr, "age")
       age    <- parseInt(ageStr, "Age not an int")
+      _      <- nonNegative(age, "age")
     } yield age
 
 
@@ -39,6 +40,10 @@ object ValidatedExample {
 
   private def nonEmpty(v: String, fieldName: String) = {
     Either.right(v).ensure(List(s"${fieldName.capitalize} empty"))(!_.isEmpty)
+  }
+
+  private def nonNegative(v: Int, fieldName: String) = {
+    Either.right(v).ensure(List(s"${fieldName.capitalize} must be non negative"))(_ > 0)
   }
 
   private def getValue(formData: FormData, fieldName: String): Either[List[String], String] = {
