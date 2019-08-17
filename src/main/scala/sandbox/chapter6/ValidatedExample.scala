@@ -29,13 +29,13 @@ object ValidatedExample {
     for {
       ageStr <- getValue(formData, "age")
       _      <- nonEmpty(ageStr, "age")
-      age    <- parseInt(ageStr, "Age not an int")
+      age    <- parseInt(ageStr, "age")
       _      <- nonNegative(age, "age")
     } yield age
 
 
   private def parseInt(age: String, errorMessage: String): Either[List[String], Int] = {
-    Either.catchOnly[NumberFormatException](age.toInt).leftMap(_ => List(errorMessage))
+    Either.catchOnly[NumberFormatException](age.toInt).leftMap(_ => List(s"${errorMessage.capitalize} not an int"))
   }
 
   private def nonEmpty(v: String, fieldName: String) = {
