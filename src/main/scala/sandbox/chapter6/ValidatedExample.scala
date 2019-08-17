@@ -25,7 +25,11 @@ object ValidatedExample {
   def readAge(formData: FormData): FailFastOr[Int] = {
     getValue(formData, "age")
       .flatMap(v => nonEmpty(v, "age"))
-      .flatMap(age => Either.catchOnly[NumberFormatException](age.toInt).leftMap(_ => List("Age not an int")))
+      .flatMap(age => parseInt(age, "Age not an int"))
+  }
+
+  private def parseInt(age: String, errorMessage: String): Either[List[String], Int] = {
+    Either.catchOnly[NumberFormatException](age.toInt).leftMap(_ => List(errorMessage))
   }
 
   private def nonEmpty(v: String, fieldName: String) = {
