@@ -29,6 +29,6 @@ object ValidatedExample {
     formData.get("age")
       .toRight(List("Age not found"))
       .ensure(List("Age empty"))(!_.isEmpty)
-      .flatMap(age => Try(age.toInt).toEither.leftMap(_ => List("Age not an int")))
+      .flatMap(age => Either.catchOnly[NumberFormatException](age.toInt).leftMap(_ => List("Age not an int")))
 
 }
