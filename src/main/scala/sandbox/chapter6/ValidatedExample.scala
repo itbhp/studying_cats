@@ -20,33 +20,33 @@ object ValidatedExample {
 
   def readName(formData: FormData): FailFastOr[String] =
     for{
-      name <- getValue(formData) ("name")
-      _    <- nonEmpty(name)     ("name")
+      name <- getValue("name") (formData)
+      _    <- nonEmpty("name") (name)
     } yield name
 
 
   def readAge(formData: FormData): FailFastOr[Int] =
     for {
-      ageStr <- getValue(formData) ("age")
-      _      <- nonEmpty(ageStr)   ("age")
-      age    <- parseInt(ageStr)   ("age")
-      _      <- nonNegative(age)   ("age")
+      ageStr <- getValue("age")    (formData)
+      _      <- nonEmpty("age")    (ageStr)
+      age    <- parseInt("age")    (ageStr)
+      _      <- nonNegative("age") (age)
     } yield age
 
 
-  private def parseInt(age: String) (fieldName: String): Either[List[String], Int] = {
+  private def parseInt(fieldName: String) (age: String): Either[List[String], Int] = {
     Either.catchOnly[NumberFormatException](age.toInt).leftMap(_ => List(s"${fieldName.capitalize} not an int"))
   }
 
-  private def nonEmpty(v: String) (fieldName: String) = {
+  private def nonEmpty(fieldName: String) (v: String) = {
     Either.right(v).ensure(List(s"${fieldName.capitalize} empty"))(!_.isEmpty)
   }
 
-  private def nonNegative(v: Int) (fieldName: String) = {
+  private def nonNegative(fieldName: String) (v: Int)  = {
     Either.right(v).ensure(List(s"${fieldName.capitalize} must be non negative"))(_ > 0)
   }
 
-  private def getValue(formData: FormData) (fieldName: String): Either[List[String], String] = {
+  private def getValue(fieldName: String) (formData: FormData): Either[List[String], String] = {
     formData.get(fieldName)
       .toRight(List(s"${fieldName.capitalize} not found"))
   }
