@@ -18,14 +18,19 @@ object ValidatedExample {
   def readUser(formData: FormData): FailAtTheEndOr[User] =
     (readName(formData).toValidated, readAge(formData).toValidated).mapN(User.apply)
 
-  def readName(formData: FormData): FailFastOr[String] =
-    getValue(formData, "name")
-      .ensure(List("Name empty"))(!_.isEmpty)
+  def readName(formData: FormData): FailFastOr[String] = {
+    getValue(formData, "name").flatMap(v => nonEmpty(v, "name"))
+  }
 
-  def readAge(formData: FormData): FailFastOr[Int] =
+  def readAge(formData: FormData): FailFastOr[Int] = {
     getValue(formData, "age")
-      .ensure(List("Age empty"))(!_.isEmpty)
+      .flatMap(v => nonEmpty(v, "age"))
       .flatMap(age => Either.catchOnly[NumberFormatException](age.toInt).leftMap(_ => List("Age not an int")))
+  }
+
+  private def nonEmpty(v: String, fieldName: String) = {
+    Either.right(v).ensure(List(s"${fieldName.capitalize} empty"))(!_.isEmpty)
+  }
 
   private def getValue(formData: FormData, fieldName: String): Either[List[String], String] = {
     formData.get(fieldName)
