@@ -16,4 +16,10 @@ class FoldableExampleTest extends FunSuite with Matchers{
     flatMap(List(12,34,56))(digits) shouldEqual List("1", "2", "3", "4", "5", "6")
   }
 
+  test("sum on list int"){
+    import cats.instances.int._
+
+    sumWithMonoid(List(1,2,3,4,5)) shouldEqual 15
+  }
+
 }
